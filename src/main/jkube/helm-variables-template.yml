@@ -1,0 +1,12 @@
+kind: Template
+parameters:
+  - name: replicaCount
+    value: 1
+  - name: imagePullPolicy
+    value: Always
+  - name: containerName
+    value: "{{ .Chart.Name }}"
+  - name: applicationHost
+    value: some-serious-host.example.com
+  - name: demoGreeting
+    value: Production World

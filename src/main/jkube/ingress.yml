@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+spec:
+  rules:
+  - host: ${applicationHost}
+    http:
+      paths:
+      - backend:
+          service:
+            name: jkube-helm
+            port:
+              number: ${applicationPort}
+        path: /
+        pathType: ImplementationSpecific

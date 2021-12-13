@@ -1,0 +1,10 @@
+spec:
+  replicas: ${replicaCount}
+  template:
+    spec:
+      containers:
+        - name: ${containerName}
+          imagePullPolicy: ${imagePullPolicy}
+          env:
+            - name: DEMO_JKUBE_GREETING
+              value: ${demoGreeting}

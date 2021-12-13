@@ -14,12 +14,18 @@
   <name>jkube-helm</name>
   <description>Demo project for Spring Boot and JKube</description>
   <properties>
-    <java.version>17</java.version>
+    <java.version>11</java.version>
+    <jkube.createExternalUrls>true</jkube.createExternalUrls>
+    <applicationPort>8082</applicationPort>
   </properties>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
   </dependencies>
 
@@ -29,7 +35,24 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
+      <plugin>
+        <groupId>org.eclipse.jkube</groupId>
+        <artifactId>kubernetes-maven-plugin</artifactId>
+        <version>1.6.0-SNAPSHOT</version>
+      </plugin>
     </plugins>
   </build>
 
+  <profiles>
+    <profile>
+      <id>dev</id>
+      <properties>
+        <containerName>${project.artifactId}</containerName>
+        <replicaCount>1</replicaCount>
+        <imagePullPolicy>IfNotPresent</imagePullPolicy>
+        <applicationHost>$(minikube ip).nip.io</applicationHost>
+        <demoGreeting>Development World</demoGreeting>
+      </properties>
+    </profile>
+  </profiles>
 </project>
