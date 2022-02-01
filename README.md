@@ -10,7 +10,7 @@ Provides default values for placeholders applicable in the dev environment.
 We assume we are running on a Minikube cluster.
 ```shell
 $ eval $(minikube docker-env)
-$ mvn -Pdev clean package k8s:build k8s:resource k8s:apply -DapplicationHost=local-dev.$(minikube ip).nip.io
+$ mvn -Pdev clean package k8s:build k8s:resource k8s:apply -Dingress.host=local-dev.$(minikube ip).nip.io
 $ mvn -Pdev k8s:undeploy
 ```
 
@@ -34,9 +34,9 @@ We assume we are running on a Minikube cluster for demo purposes.
 ```shell
 $ eval $(minikube docker-env)
 $ mvn clean package k8s:build k8s:resource k8s:helm
-$ helm install jkube-helm ./target/jkube-helm-0.0.1-SNAPSHOT-helm.tar.gz            \
-    --set applicationhost=production.$(minikube ip).nip.io                          \
-    --set imagepullpolicy=IfNotPresent
+$ helm install jkube-helm ./target/jkube-helm-0.0.1-SNAPSHOT-helm.tar.gz         \
+    --set ingress.host=production.$(minikube ip).nip.io                          \
+    --set deployment.container.imagepullpolicy=IfNotPresent
 $ helm delete jkube-helm
 ```
 

@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 spec:
   rules:
-  - host: ${applicationHost}
+  - host: ${ingress.host}
     http:
       paths:
       - backend:

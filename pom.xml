@@ -14,7 +14,7 @@
   <name>jkube-helm</name>
   <description>Demo project for Spring Boot and JKube</description>
   <properties>
-    <java.version>11</java.version>
+    <java.version>17</java.version>
     <jkube.createExternalUrls>true</jkube.createExternalUrls>
     <applicationPort>8082</applicationPort>
   </properties>
@@ -39,6 +39,32 @@
         <groupId>org.eclipse.jkube</groupId>
         <artifactId>kubernetes-maven-plugin</artifactId>
         <version>1.6.0-SNAPSHOT</version>
+        <configuration>
+          <helm>
+            <parameters>
+              <parameter>
+                <name>deployment.replicas</name>
+                <value>1</value>
+              </parameter>
+              <parameter>
+                <name>deployment.container.name</name>
+                <value>{{ .Chart.Name | lower | nospace }}</value>
+              </parameter>
+              <parameter>
+                <name>deployment.container.imagePullPolicy</name>
+                <value>Always</value>
+              </parameter>
+              <parameter>
+                <name>ingress.host</name>
+                <value>some-serious-host.example.com</value>
+              </parameter>
+              <parameter>
+                <name>application.greeting</name>
+                <value>Production World</value>
+              </parameter>
+            </parameters>
+          </helm>
+        </configuration>
       </plugin>
     </plugins>
   </build>
@@ -47,11 +73,11 @@
     <profile>
       <id>dev</id>
       <properties>
-        <containerName>${project.artifactId}</containerName>
-        <replicaCount>1</replicaCount>
-        <imagePullPolicy>IfNotPresent</imagePullPolicy>
-        <applicationHost>$(minikube ip).nip.io</applicationHost>
-        <demoGreeting>Development World</demoGreeting>
+        <deployment.replicas>1</deployment.replicas>
+        <deployment.container.name>${project.artifactId}</deployment.container.name>
+        <deployment.container.imagePullPolicy>IfNotPresent</deployment.container.imagePullPolicy>
+        <ingress.host>$(minikube ip).nip.io</ingress.host>
+        <application.greeting>Development World</application.greeting>
       </properties>
     </profile>
   </profiles>
