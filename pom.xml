@@ -15,9 +15,17 @@
   <description>Demo project for Spring Boot and JKube</description>
   <properties>
     <java.version>17</java.version>
+    <jkube.artifactId>kubernetes-maven-plugin</jkube.artifactId>
     <jkube.version>1.11.0</jkube.version>
     <jkube.createExternalUrls>true</jkube.createExternalUrls>
+    <jkube.generator.name>marcnuri/repo-for-tests</jkube.generator.name>
     <applicationPort>8082</applicationPort>
+    <!-- HELM repository settings (OpenShift) -->
+    <jkube.helm.snapshotRepository.name>chart-museum</jkube.helm.snapshotRepository.name>
+    <jkube.helm.snapshotRepository.url>http://chart-museum.dev-sandbox.marcnuri.com/api/charts</jkube.helm.snapshotRepository.url>
+    <jkube.helm.snapshotRepository.type>CHARTMUSEUM</jkube.helm.snapshotRepository.type>
+    <jkube.helm.snapshotRepository.username>secret</jkube.helm.snapshotRepository.username>
+    <jkube.helm.snapshotRepository.password>shouldnt-be-here-use-env</jkube.helm.snapshotRepository.password>
   </properties>
   <dependencies>
     <dependency>
@@ -38,7 +46,7 @@
       </plugin>
       <plugin>
         <groupId>org.eclipse.jkube</groupId>
-        <artifactId>kubernetes-maven-plugin</artifactId>
+        <artifactId>${jkube.artifactId}</artifactId>
         <version>${jkube.version}</version>
         <configuration>
           <helm>
@@ -57,7 +65,7 @@
               </parameter>
               <parameter>
                 <name>ingress.host</name>
-                <value>some-serious-host.example.com</value>
+                <value>some-serious-host.dev-sandbox.marcnuri.com</value>
               </parameter>
               <parameter>
                 <name>application.greeting</name>
@@ -77,8 +85,21 @@
         <deployment.replicas>1</deployment.replicas>
         <deployment.container.name>${project.artifactId}</deployment.container.name>
         <deployment.container.imagePullPolicy>IfNotPresent</deployment.container.imagePullPolicy>
-        <ingress.host>$(minikube ip).nip.io</ingress.host>
         <application.greeting>Development World</application.greeting>
+      </properties>
+    </profile>
+    <profile>
+      <id>openshift</id>
+      <properties>
+        <jkube.artifactId>openshift-maven-plugin</jkube.artifactId>
+        <jkube.openshift.generateRoute>false</jkube.openshift.generateRoute> <!-- Use ingress fragment instead -->
+        <ingress.host>helm.dev-sandbox.marcnuri.com</ingress.host>
+      </properties>
+    </profile>
+    <profile>
+      <id>minikube</id>
+      <properties>
+        <ingress.host>$(minikube ip).nip.io</ingress.host>
       </properties>
     </profile>
   </profiles>
