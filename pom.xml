@@ -13,6 +13,15 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>jkube-helm</name>
   <description>Demo project for Spring Boot and JKube</description>
+  <url>https://github.com/marcnuri-demo/jkube-helm</url>
+  <scm>
+    <url>git@github.com:marcnuri-demo/jkube-helm.git</url>
+  </scm>
+  <developers>
+    <developer>
+      <name>Marc Nuri</name>
+    </developer>
+  </developers>
   <properties>
     <java.version>17</java.version>
     <applicationPort>8082</applicationPort>
