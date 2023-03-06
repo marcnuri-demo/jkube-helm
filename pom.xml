@@ -15,11 +15,10 @@
   <description>Demo project for Spring Boot and JKube</description>
   <properties>
     <java.version>17</java.version>
+    <applicationPort>8082</applicationPort>
     <jkube.artifactId>kubernetes-maven-plugin</jkube.artifactId>
     <jkube.version>1.11.0</jkube.version>
-    <jkube.createExternalUrls>true</jkube.createExternalUrls>
     <jkube.generator.name>marcnuri/repo-for-tests</jkube.generator.name>
-    <applicationPort>8082</applicationPort>
     <!-- HELM repository settings (OpenShift) -->
     <jkube.helm.snapshotRepository.name>chart-museum</jkube.helm.snapshotRepository.name>
     <jkube.helm.snapshotRepository.url>http://chart-museum.dev-sandbox.marcnuri.com/api/charts</jkube.helm.snapshotRepository.url>
