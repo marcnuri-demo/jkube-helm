@@ -19,6 +19,13 @@ First part runs on CI server.
 ```shell
 mvn clean package k8s:build k8s:push k8s:resource k8s:helm k8s:helm-push
 ```
+
+Image pushed to https://hub.docker.com/r/marcnuri/repo-for-tests
+
+Helm chart pushed to
+- http://chart-museum.dev-sandbox.marcnuri.com/
+- http://chart-museum.dev-sandbox.marcnuri.com/api/charts
+
 Second part executed by operator?
 ```shell
 helm repo add dev-sandbox http://chart-museum.dev-sandbox.marcnuri.com/ --username secret --password shouldnt-be-here-use-env
