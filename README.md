@@ -11,17 +11,6 @@ Initialize a ChartMuseum instance. This is required for the outer-loop.
 jbang ./demo/PrepareOpenShiftEnvironment.java
 ```
 
-### Inner Loop
-
-Use the `dev` and `OpenShift` Maven profiles.
-
-Provides default values for placeholders applicable in the `dev` environment for OpenShift.
-
-```shell
-mvn -Pdev,OpenShift clean package oc:build oc:resource oc:apply
-mvn -Pdev,OpenShift oc:undeploy
-```
-
 ### Outer Loop
 
 No Maven profile.
@@ -36,6 +25,21 @@ helm repo add dev-sandbox http://chart-museum.dev-sandbox.marcnuri.com/ --userna
 helm repo update dev-sandbox
 helm install jkube-helm dev-sandbox/jkube-helm --devel
 helm delete jkube-helm
+helm install jkube-helm dev-sandbox/jkube-helm --devel   \
+  --set ingress.host=production.dev-sandbox.marcnuri.com \
+  --set application.greeting="Prod Override"
+helm delete jkube-helm
+```
+
+### Inner Loop
+
+Use the `dev` and `OpenShift` Maven profiles.
+
+Provides default values for placeholders applicable in the `dev` environment for OpenShift.
+
+```shell
+mvn -Pdev,OpenShift clean package oc:build oc:resource oc:apply
+mvn -Pdev,OpenShift oc:undeploy
 ```
 
 ## Minikube (needs updating)
