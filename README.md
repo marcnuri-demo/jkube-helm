@@ -38,8 +38,8 @@ Use the `dev` and `OpenShift` Maven profiles.
 Provides default values for placeholders applicable in the `dev` environment for OpenShift.
 
 ```shell
-mvn -Pdev,OpenShift clean package oc:build oc:resource oc:apply
-mvn -Pdev,OpenShift oc:undeploy
+mvn -Pdev,openshift clean package oc:build oc:resource oc:apply
+mvn -Pdev,openshift oc:undeploy
 ```
 
 ## Minikube (needs updating)
