@@ -26,7 +26,7 @@
     <java.version>17</java.version>
     <applicationPort>8082</applicationPort>
     <jkube.artifactId>kubernetes-maven-plugin</jkube.artifactId>
-    <jkube.version>1.11.0</jkube.version>
+    <jkube.version>1.12.0</jkube.version>
     <jkube.generator.name>marcnuri/repo-for-tests</jkube.generator.name>
     <!-- HELM repository settings (OpenShift) -->
     <jkube.helm.snapshotRepository.name>chart-museum</jkube.helm.snapshotRepository.name>
